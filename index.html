@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de empleados</title>
+    <script src="js/main.js" defer></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem 1.25rem;
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f3efe6;
+            color: #2b2a26;
+        }
+
+        header{
+            max-width: 60rem;
+            margin: 0 auto 2rem;
+        }
+
+        h1{
+            margin: 0 0 0.25rem;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #5c584d;
+        }
+
+        main {
+            max-width: 60rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+            gap: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Directorio de empleados</h1>
+        <p>Cada tarjeta es el mismo componente con datos distintos.</p>
+    </header>
+
+    <!--R1 Template propio-->
+    <template id="plantilla-empleado">
+        <style>
+            :host {
+                display: block;
+            }
+
+            .tarjeta {
+                padding: 1.25rem;
+                background: #ffffff;
+                border: 1px solid #d9d2c1;
+                border-left: 6px solid #1f6f5c;
+                border-radius: 6px;
+                font-family: Georgia, "Times New Roman", serif;
+            }
+
+            .nombre {
+                margin: 0 0 0.25rem;
+                font-size: 1.25rem;
+                color: #1b1a17;
+            }
+
+            .cargo {
+                margin: 0 0 1rem;
+                color: #1f6f5c;
+                font-style: italic;
+            }
+
+            dl {
+                margin: 0;
+            }
+
+            .dato {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.4rem 0;
+                border-top: 1px solid #ece6d6;
+            }
+
+            dt {
+                color: #6b6657;
+            }
+
+            dd {
+                margin: 0;
+                font-weight: bold;
+            }
+
+            .nota {
+                margin-top: 1rem;
+                padding-top: 0.75rem;
+                border-top: 1px solid #ece6d6;
+                font-size: 0.95rem;
+                color: #4a463c;
+            }
+
+        </style>
+
+        <article class="tarjeta">
+            <h2 class="nombre"></h2>
+            <p class="cargo"></p>
+
+            <dl>
+                <div class="dato">
+                    <dt>Área</dt>
+                    <dd class="area"></dd>
+                </div>
+                <div class="dato">
+                    <dt>Extensión</dt>
+                    <dd class="extension"></dd>
+                </div>
+            </dl>
+<!--R4 Slot: espacio para una nota libre que se escribe desde index.html-->
+            <div class="nota">
+                <slot name="nota">Sin notas.</slot>
+            </div>
+        </article>
+    </template>
+
+    <main>
+<!--R5 Reutilización: 3 instancias del mismo componente con datos distintos-->
+        <tarjeta-empleado
+            nombre="Laura Martínez"
+            cargo="Desarrolladora frontend"
+            area="Tecnologia"
+            extension="101">
+            <p slot="nota">Responsable de la interfaz del portal de clientes.</p>
+        </tarjeta-empleado>
+
+        <tarjeta-empleado
+            nombre="Carlos Rojas"
+            cargo="Analista de datos"
+            area="Inteligencia de negocio"
+            extension="214">
+            <p slot="nota">Prepara los informes mensuales de ventas.</p>
+        </tarjeta-empleado>
+
+        <tarjeta-empleado
+            nombre="Andrea Peréz"
+            cargo="Coordinadora de talento humano"
+            area="Recursos Humanos"
+            extension="330">
+            <p slot="nota">Atiende solicitudes de contratacion y bienestar.</p>
+        </tarjeta-empleado>
+
+        
+    </main>
+</body>
+</html>
